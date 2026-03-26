@@ -22,6 +22,11 @@ awww img "$WALLPAPER"
 # Generate pywal colors (postrun hook handles GTK + papirus-folders)
 wal -i "$WALLPAPER"
 
+# Push new colors to all running terminal instances
+for pty in /dev/pts/[0-9]*; do
+    cat ~/.cache/wal/sequences > "$pty" 2>/dev/null || true
+done
+
 # Sync to SDDM silent theme backgrounds
 sudo cp "$WALLPAPER" /usr/share/sddm/themes/silent/backgrounds/wallpaper.jpg
 
