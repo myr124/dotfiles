@@ -16,6 +16,9 @@ if [[ ! -f "$WALLPAPER" ]]; then
     exit 1
 fi
 
+# Set desktop wallpaper
+awww img "$WALLPAPER"
+
 # Generate pywal colors (postrun hook handles GTK + papirus-folders)
 wal -i "$WALLPAPER"
 
