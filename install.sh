@@ -27,6 +27,7 @@ link "$DOTFILES/config/fuzzel/fuzzel_theme.ini"   "$HOME/.config/fuzzel/fuzzel_t
 link "$DOTFILES/config/wlogout/layout"            "$HOME/.config/wlogout/layout"
 link "$DOTFILES/config/wlogout/style.css"         "$HOME/.config/wlogout/style.css"
 link "$DOTFILES/config/starship.toml"             "$HOME/.config/starship.toml"
+link "$DOTFILES/config/hypr/scripts/setwallpaper" "$HOME/.config/hypr/scripts/setwallpaper"
 
 echo "==> Making wal postrun executable..."
 chmod +x "$HOME/.config/wal/postrun"
