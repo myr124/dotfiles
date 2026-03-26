@@ -19,8 +19,11 @@ fi
 # Set desktop wallpaper
 awww img "$WALLPAPER"
 
-# Generate pywal colors (postrun hook handles GTK + papirus-folders)
+# Generate pywal colors
 wal -i "$WALLPAPER"
+
+# Apply GTK colors + papirus-folders (pywal16 doesn't support postrun hooks)
+python3 ~/.config/wal/postrun
 
 # Push new colors to all running terminal instances
 for pty in /dev/pts/[0-9]*; do
