@@ -30,6 +30,9 @@ for pty in /dev/pts/[0-9]*; do
     cat ~/.cache/wal/sequences > "$pty" 2>/dev/null || true
 done
 
+# Reapply papirus folder color (needs sudo, runs here where a terminal is available)
+sudo papirus-folders -C grey --theme Papirus-Dark
+
 # Sync to SDDM silent theme backgrounds
 sudo cp "$WALLPAPER" /usr/share/sddm/themes/silent/backgrounds/wallpaper.jpg
 

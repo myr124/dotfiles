@@ -47,5 +47,6 @@ for gtk_dir in ["gtk-4.0", "gtk-3.0"]:
     path.write_text(css)
     print(f"Written: {path}")
 
-# Reapply papirus-folders with teal to match the dark teal palette
-subprocess.run(["papirus-folders", "-C", "grey", "--theme", "Papirus-Dark"], check=False)
+# Force GTK4 apps to reload CSS by toggling color-scheme
+subprocess.run(["gsettings", "set", "org.gnome.desktop.interface", "color-scheme", "default"], check=False)
+subprocess.run(["gsettings", "set", "org.gnome.desktop.interface", "color-scheme", "prefer-dark"], check=False)
