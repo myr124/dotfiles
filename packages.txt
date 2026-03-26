@@ -1,0 +1,35 @@
+# Core
+hyprland
+waybar
+kitty
+fish
+starship
+
+# App launcher / logout
+fuzzel
+wlogout
+
+# Wallpaper & theming
+python-pywal16
+adw-gtk-theme-git
+papirus-icon-theme
+papirus-folders-git
+
+# Display manager
+sddm
+
+# File manager
+nautilus
+
+# Fonts
+ttf-jetbrains-mono-nerd
+ttf-google-sans
+
+# Utilities
+eza
+grim
+slurp
+wl-copy
+playerctl
+brightnessctl
+wpctl

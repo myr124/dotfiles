@@ -1,0 +1,51 @@
+#!/usr/bin/env python3
+"""Generate GTK CSS from pywal colors and write to gtk-4.0/gtk.css and gtk-3.0/gtk.css."""
+
+import json
+import os
+import subprocess
+from pathlib import Path
+
+colors_path = Path.home() / ".cache/wal/colors.json"
+with open(colors_path) as f:
+    wal = json.load(f)
+
+bg     = wal["special"]["background"]
+fg     = wal["special"]["foreground"]
+accent = wal["colors"]["color6"]   # lightest accent color
+accent_fg = wal["colors"]["color0"] # dark fg on light accent
+surface = wal["colors"]["color8"]  # slightly lighter than bg for cards/headerbars
+
+css = f"""\
+/*
+ * GTK Colors
+ * Generated from pywal
+ */
+
+@define-color accent_color {accent};
+@define-color accent_fg_color {accent_fg};
+@define-color accent_bg_color {accent};
+@define-color window_bg_color {bg};
+@define-color window_fg_color {fg};
+@define-color headerbar_bg_color {surface};
+@define-color headerbar_fg_color {fg};
+@define-color popover_bg_color {surface};
+@define-color popover_fg_color {fg};
+@define-color view_bg_color {bg};
+@define-color view_fg_color {fg};
+@define-color card_bg_color {surface};
+@define-color card_fg_color {fg};
+@define-color sidebar_bg_color @window_bg_color;
+@define-color sidebar_fg_color @window_fg_color;
+@define-color sidebar_border_color @window_bg_color;
+@define-color sidebar_backdrop_color @window_bg_color;
+"""
+
+for gtk_dir in ["gtk-4.0", "gtk-3.0"]:
+    path = Path.home() / ".config" / gtk_dir / "gtk.css"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(css)
+    print(f"Written: {path}")
+
+# Reapply papirus-folders with teal to match the dark teal palette
+subprocess.run(["papirus-folders", "-C", "grey", "--theme", "Papirus-Dark"], check=False)
