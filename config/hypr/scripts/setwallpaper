@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# setwallpaper <path>
+# Sets wallpaper, generates pywal colors, and updates SDDM background.
+
+set -e
+
+if [[ -z "$1" ]]; then
+    echo "Usage: setwallpaper <path>"
+    exit 1
+fi
+
+WALLPAPER="$(realpath "$1")"
+
+if [[ ! -f "$WALLPAPER" ]]; then
+    echo "File not found: $WALLPAPER"
+    exit 1
+fi
+
+# Generate pywal colors (postrun hook handles GTK + papirus-folders)
+wal -i "$WALLPAPER"
+
+# Sync to SDDM silent theme backgrounds
+sudo cp "$WALLPAPER" /usr/share/sddm/themes/silent/backgrounds/wallpaper.jpg
+
+echo "Wallpaper set: $WALLPAPER"

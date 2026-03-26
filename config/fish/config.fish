@@ -10,6 +10,7 @@ if status is-interactive # Commands to run in interactive sessions can go here
     end
 
     # Aliases
+    alias setwallpaper '~/.config/hypr/scripts/setwallpaper'
     alias pamcan pacman
     alias ls 'eza --icons'
     alias clear "printf '\033[2J\033[3J\033[1;1H'"
