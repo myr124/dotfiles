@@ -19,8 +19,8 @@ fi
 # Set desktop wallpaper
 awww img "$WALLPAPER"
 
-# Generate pywal colors
-wal -i "$WALLPAPER" -n
+# Generate pywal colors (skip sequences and tty — apply after bg is patched)
+wal -i "$WALLPAPER" -n -s -t
 
 # Patch colors.json: desaturate background so pywal's teal bias doesn't bleed everywhere
 python3 - <<'EOF'
@@ -43,8 +43,8 @@ p.write_text(json.dumps(data, indent=4))
 print(f"bg patched -> {neutral}")
 EOF
 
-# Re-export all pywal templates with patched colors (skip wallpaper + sequences for now)
-wal -R -n -s -t
+# Re-export all pywal templates with patched colors and apply sequences
+wal -R -n -t
 
 # Apply GTK colors (pywal16 doesn't support postrun hooks)
 python3 ~/.config/wal/postrun
