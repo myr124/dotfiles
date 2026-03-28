@@ -19,8 +19,8 @@ fi
 # Set desktop wallpaper
 awww img "$WALLPAPER"
 
-# Generate pywal colors (skip sequences and tty — apply after bg is patched)
-wal -i "$WALLPAPER" -n -s -t
+# Generate pywal colors
+wal -i "$WALLPAPER" -n
 
 # Patch colors.json: desaturate background so pywal's teal bias doesn't bleed everywhere
 python3 - <<'EOF'
