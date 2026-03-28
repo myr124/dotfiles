@@ -23,11 +23,15 @@ link "$DOTFILES/config/wal/postrun"               "$HOME/.config/wal/postrun"
 link "$DOTFILES/config/fish/config.fish"          "$HOME/.config/fish/config.fish"
 link "$DOTFILES/config/kitty/kitty.conf"          "$HOME/.config/kitty/kitty.conf"
 link "$DOTFILES/config/fuzzel/fuzzel.ini"         "$HOME/.config/fuzzel/fuzzel.ini"
-link "$DOTFILES/config/fuzzel/fuzzel_theme.ini"   "$HOME/.config/fuzzel/fuzzel_theme.ini"
+# fuzzel_theme.ini is a pywal symlink, not a dotfile
+ln -sf "$HOME/.cache/wal/colors-fuzzel.ini" "$HOME/.config/fuzzel/fuzzel_theme.ini"
 link "$DOTFILES/config/wlogout/layout"            "$HOME/.config/wlogout/layout"
 link "$DOTFILES/config/wlogout/style.css"         "$HOME/.config/wlogout/style.css"
 link "$DOTFILES/config/starship.toml"             "$HOME/.config/starship.toml"
 link "$DOTFILES/config/hypr/scripts/setwallpaper" "$HOME/.config/hypr/scripts/setwallpaper"
+
+# waybar theme.css is a pywal symlink
+ln -sf "$HOME/.cache/wal/colors-waybar.css" "$HOME/.config/waybar/theme.css"
 
 echo "==> Making wal postrun executable..."
 chmod +x "$HOME/.config/wal/postrun"
