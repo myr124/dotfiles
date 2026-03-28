@@ -1,16 +1,26 @@
 #!/usr/bin/env python3
 """Generate GTK CSS from pywal colors and write to gtk-4.0/gtk.css and gtk-3.0/gtk.css."""
 
+import colorsys
 import json
 import os
 import subprocess
 from pathlib import Path
 
+
+def desaturate(hex_color):
+    hex_color = hex_color.lstrip("#")
+    r, g, b = (int(hex_color[i:i+2], 16) / 255 for i in (0, 2, 4))
+    h, l, s = colorsys.rgb_to_hls(r, g, b)
+    r2, g2, b2 = colorsys.hls_to_rgb(h, l, 0)
+    return "#{:02x}{:02x}{:02x}".format(int(r2*255), int(g2*255), int(b2*255))
+
+
 colors_path = Path.home() / ".cache/wal/colors.json"
 with open(colors_path) as f:
     wal = json.load(f)
 
-bg     = wal["special"]["background"]
+bg     = desaturate(wal["special"]["background"])
 fg     = wal["special"]["foreground"]
 accent = wal["colors"]["color6"]   # lightest accent color
 accent_fg = wal["colors"]["color0"] # dark fg on light accent
