@@ -20,7 +20,7 @@ colors_path = Path.home() / ".cache/wal/colors.json"
 with open(colors_path) as f:
     wal = json.load(f)
 
-bg     = desaturate(wal["special"]["background"])
+bg     = wal["special"]["background"]
 fg     = wal["special"]["foreground"]
 accent = wal["colors"]["color6"]   # lightest accent color
 accent_fg = wal["colors"]["color0"] # dark fg on light accent

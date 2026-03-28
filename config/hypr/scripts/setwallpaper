@@ -20,9 +20,33 @@ fi
 awww img "$WALLPAPER"
 
 # Generate pywal colors
-wal -i "$WALLPAPER"
+wal -i "$WALLPAPER" -n
 
-# Apply GTK colors + papirus-folders (pywal16 doesn't support postrun hooks)
+# Patch colors.json: desaturate background so pywal's teal bias doesn't bleed everywhere
+python3 - <<'EOF'
+import colorsys, json
+from pathlib import Path
+
+def desaturate(hex_color):
+    h = hex_color.lstrip("#")
+    r, g, b = (int(h[i:i+2], 16) / 255 for i in (0, 2, 4))
+    hue, l, s = colorsys.rgb_to_hls(r, g, b)
+    r2, g2, b2 = colorsys.hls_to_rgb(hue, l, 0)
+    return "#{:02x}{:02x}{:02x}".format(int(r2*255), int(g2*255), int(b2*255))
+
+p = Path.home() / ".cache/wal/colors.json"
+data = json.loads(p.read_text())
+neutral = desaturate(data["special"]["background"])
+data["special"]["background"] = neutral
+data["colors"]["color0"] = neutral
+p.write_text(json.dumps(data, indent=4))
+print(f"bg patched -> {neutral}")
+EOF
+
+# Re-export all pywal templates with patched colors (skip wallpaper + sequences for now)
+wal -R -n -s -t
+
+# Apply GTK colors (pywal16 doesn't support postrun hooks)
 python3 ~/.config/wal/postrun
 
 # Push new colors to all running terminal instances
