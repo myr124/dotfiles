@@ -19,6 +19,7 @@ link() {
 }
 
 link "$DOTFILES/config/hypr/hyprland.conf"       "$HOME/.config/hypr/hyprland.conf"
+link "$DOTFILES/config/mako/config"              "$HOME/.config/mako/config"
 link "$DOTFILES/config/wal/postrun"               "$HOME/.config/wal/postrun"
 link "$DOTFILES/config/fish/config.fish"          "$HOME/.config/fish/config.fish"
 link "$DOTFILES/config/kitty/kitty.conf"          "$HOME/.config/kitty/kitty.conf"
