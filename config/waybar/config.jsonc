@@ -1,0 +1,69 @@
+{
+	"include": [
+		"~/.config/waybar/modules/*.jsonc",
+		"~/.config/waybar/modules/custom/*.jsonc",
+		"~/.config/waybar/modules/hyprland/*.jsonc"
+
+		// modules that are not included by default:
+		// "~/.config/waybar/modules/extras/*.jsonc"
+	],
+
+	/*------------
+	    layout
+	------------*/
+
+	"modules-left": [
+		"group/user",
+		"hyprland/workspaces",
+		"hyprland/window"
+	],
+	"modules-center": [
+		"idle_inhibitor",
+		"clock#time",
+		"clock#date",
+	],
+	"modules-right": [
+		"mpris",
+		"network",
+		"bluetooth",
+		"custom/system_update",
+		"custom/night_light",
+		"backlight",
+		"battery",
+		"custom/cheatsheet",
+		"custom/power_menu",
+		"group/pulseaudio"
+	],
+
+	/*-------------
+	    options
+	-------------*/
+
+	// "expand-center":
+	// "expand-left":
+	// "expand-right":
+	"layer": "top",
+	// "output":
+	// "position":
+	"height": 0,
+	"width": 0,
+	"margin": 0,
+	// "margin-top":
+	// "margin-left":
+	// "margin-bottom":
+	// "margin-right":
+	// "no-center":
+	"spacing": 0,
+	// "name":
+	"mode": "dock",
+	// "start_hidden":
+	// "modifier-reset":
+	// "exclusive":
+	// "fixed-center":
+	// "passthrough":
+	// "ipc":
+	// "id":
+	"reload_style_on_change": true
+	// "on-sigusr1":
+	// "on-sigusr2":
+}

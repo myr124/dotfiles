@@ -1,0 +1,7 @@
+{
+	"custom/cheatsheet": {
+		"format": "󰌌",
+		"on-click": "kitty --title cheatsheet -e ~/.config/waybar/scripts/cheatsheet.sh",
+		"tooltip-format": "Keybindings"
+	}
+}
