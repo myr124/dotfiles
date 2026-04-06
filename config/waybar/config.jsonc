@@ -30,6 +30,7 @@
 		"custom/night_light",
 		"backlight",
 		"battery",
+		"custom/swaync",
 		"custom/cheatsheet",
 		"custom/power_menu",
 		"group/pulseaudio"

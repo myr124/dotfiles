@@ -61,21 +61,5 @@ for gtk_dir in ["gtk-4.0", "gtk-3.0"]:
 subprocess.run(["gsettings", "set", "org.gnome.desktop.interface", "color-scheme", "default"], check=False)
 subprocess.run(["gsettings", "set", "org.gnome.desktop.interface", "color-scheme", "prefer-dark"], check=False)
 
-# Regenerate mako config with pywal colors
-mako_config = Path.home() / ".config/mako/config"
-mako_colors = Path.home() / ".cache/wal/colors-mako"
-if mako_config.exists() and mako_colors.exists():
-    colors_text = mako_colors.read_text()
-    color_map = {}
-    for line in colors_text.splitlines():
-        if "=" in line:
-            k, v = line.split("=", 1)
-            alpha = "99" if k.strip() == "background-color" else "ff"
-            color_map[k.strip()] = v.strip() + alpha
-    config = mako_config.read_text()
-    for key, value in color_map.items():
-        import re
-        config = re.sub(rf"^{key}=.*$", f"{key}={value}", config, flags=re.MULTILINE)
-    mako_config.write_text(config)
-    subprocess.run(["makoctl", "reload"], check=False)
-    print("Reloaded mako")
+# Reload swaync
+subprocess.run(["swaync-client", "--reload-css"], check=False)
