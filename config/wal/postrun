@@ -70,7 +70,8 @@ if mako_config.exists() and mako_colors.exists():
     for line in colors_text.splitlines():
         if "=" in line:
             k, v = line.split("=", 1)
-            color_map[k.strip()] = v.strip() + "ff"
+            alpha = "99" if k.strip() == "background-color" else "ff"
+            color_map[k.strip()] = v.strip() + alpha
     config = mako_config.read_text()
     for key, value in color_map.items():
         import re
